@@ -36,11 +36,6 @@ The `S.` prefix is important — `S.browser_fallback_url=...` tells Android it's
 
 ## How to run it
 
-```bash
-# Start a server to catch the callback
-python3 -m http.server 8080
-```
-
 Then open either of these in Arc for Android:
 
 ### Tap variant (1 click + Deny)
